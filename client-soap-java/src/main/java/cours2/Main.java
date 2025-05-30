@@ -1,0 +1,25 @@
+package cours2;
+
+import main.cours2.ws.BanqueService;
+import main.cours2.ws.Compte;
+
+public class Main {
+    public static void main(String[] args) {
+
+
+        BanqueService proxy = new BanqueWS().getBanqueServicePort();
+        System.out.println(proxy.conversionEuroToDh(92));
+        Compte compte = proxy.getCompte(4);
+        System.out.println("-------------------------------");
+        System.out.println(compte.getCode());
+        System.out.println(compte.getSolde());
+        System.out.println(compte.getDateCreation());
+
+        proxy.ListComptes().forEach( cp-> {
+            System.out.println("-------------------------------");
+            System.out.println(cp.getCode());
+            System.out.println(cp.getSolde());
+            System.out.println(cp.getDateCreation());
+        });
+    }
+}
